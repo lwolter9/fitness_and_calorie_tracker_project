@@ -1,0 +1,7 @@
+C:\Users\Leroy\Desktop\C#\Project\Fitness Tracker App\Phase 1\Fitness Tracker Phase 1\Fitness Tracker Phase 1\bin\Debug\Fitness Tracker Phase 1.exe.config
+C:\Users\Leroy\Desktop\C#\Project\Fitness Tracker App\Phase 1\Fitness Tracker Phase 1\Fitness Tracker Phase 1\bin\Debug\Fitness Tracker Phase 1.exe
+C:\Users\Leroy\Desktop\C#\Project\Fitness Tracker App\Phase 1\Fitness Tracker Phase 1\Fitness Tracker Phase 1\bin\Debug\Fitness Tracker Phase 1.pdb
+C:\Users\Leroy\Desktop\C#\Project\Fitness Tracker App\Phase 1\Fitness Tracker Phase 1\Fitness Tracker Phase 1\obj\Debug\Fitness Tracker Phase 1.csproj.AssemblyReference.cache
+C:\Users\Leroy\Desktop\C#\Project\Fitness Tracker App\Phase 1\Fitness Tracker Phase 1\Fitness Tracker Phase 1\obj\Debug\Fitness Tracker Phase 1.csproj.CoreCompileInputs.cache
+C:\Users\Leroy\Desktop\C#\Project\Fitness Tracker App\Phase 1\Fitness Tracker Phase 1\Fitness Tracker Phase 1\obj\Debug\Fitness Tracker Phase 1.exe
+C:\Users\Leroy\Desktop\C#\Project\Fitness Tracker App\Phase 1\Fitness Tracker Phase 1\Fitness Tracker Phase 1\obj\Debug\Fitness Tracker Phase 1.pdb

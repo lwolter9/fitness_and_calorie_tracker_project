@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Leroy\\Desktop\\C#\\Project\\Fitness Tracker App\\Phase 1\\Fitness Tracker Phase 1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BDE72D37-69F9-4BC8-877F-7FCF6850181F}|Fitness Tracker Phase 1\\Fitness Tracker Phase 1.csproj|c:\\users\\leroy\\desktop\\c#\\project\\fitness tracker app\\phase 1\\fitness tracker phase 1\\fitness tracker phase 1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BDE72D37-69F9-4BC8-877F-7FCF6850181F}|Fitness Tracker Phase 1\\Fitness Tracker Phase 1.csproj|solutionrelative:fitness tracker phase 1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Leroy\\Desktop\\C#\\Project\\Fitness Tracker App\\Phase 1\\Fitness Tracker Phase 1\\Fitness Tracker Phase 1\\Program.cs",
+              "RelativeDocumentMoniker": "Fitness Tracker Phase 1\\Program.cs",
+              "ToolTip": "C:\\Users\\Leroy\\Desktop\\C#\\Project\\Fitness Tracker App\\Phase 1\\Fitness Tracker Phase 1\\Fitness Tracker Phase 1\\Program.cs",
+              "RelativeToolTip": "Fitness Tracker Phase 1\\Program.cs",
+              "ViewState": "AgIAAGQAAAAAAAAAAAAQwHIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-30T08:29:56.708Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
