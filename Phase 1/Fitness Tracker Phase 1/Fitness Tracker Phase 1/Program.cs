@@ -58,6 +58,10 @@ namespace Fitness_Tracker_Phase_1
 
             }
         }
+    internal class Tracker //this holds all the information. the day object will act as a container for the Consumed objects. the food objects will hold individual food data 
+        {
+
+        }
 
     internal class Program
         {
@@ -119,7 +123,7 @@ namespace Fitness_Tracker_Phase_1
             }
         void deleteFoodFromDay(string foodName, string dayTime, Dictionary<string, List<Food>> database) // may need to change if consumed is used instead
             {
-            database[dayTime].Find(Food.Name == foodName).Delete(); // figure out how to access fields in a list
+            database[dayTime].Remove(database[dayTime].Find(Food => Food.Name == foodName)); // figure out how to access fields in a list. this was done through lambda expression
             }
         void displaySpecificDay()
             {
@@ -128,6 +132,6 @@ namespace Fitness_Tracker_Phase_1
         }
     }
 
-// TODO: add a dictionary to track all the food objects
+
 // TODO: figure out the data needed for the day objects. current requirements: methods(sumIntakeQuantity, removeItem, addItem, existingItem, displayTodaysIntake)
 // TODO: add functionality to enable multiple inputs for the same time of day
