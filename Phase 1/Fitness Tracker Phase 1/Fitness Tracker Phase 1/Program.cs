@@ -45,20 +45,29 @@ namespace Fitness_Tracker_Phase_1
         }
     internal class Day // stores the food objects in 4 categories depending on user input as well as the amount of food consumed use a dictionary to acomplish this
         {
-        static public Dictionary<string, Food> foodDatabase = new Dictionary<string, Food> { };
         public Dictionary<string, List<Food>> foodTime = new Dictionary<string, List<Food>> { { "breakfast", new List<Food>(1) }, { "lunch", new List<Food>(1) }, { "dinner", new List<Food>(1) }, { "snack", new List<Food>(1) } }; // TODO: figure out dictionaries
 
-        public void createFood() // creates a new food item and adds it to the food database
+        public void createEntry() // creates a new food item and adds it to the food database
             {
 
             }
 
-        public void updateFood() // updates food in database
+        public void updateEntry() // updates food in database
+            {
+
+            }
+
+        public void deleteEntry() // updates food in database
+            {
+
+            }
+
+        public void findEntry() // updates food in database
             {
 
             }
         }
-    internal class Tracker //this holds all the information. the day object will act as a container for the Consumed objects. the food objects will hold individual food data 
+    internal class Tracker //this holds all the information. the day object will act as a container for the Consumed objects. the food objects will hold individual food data. needs to check if today exists if not generate a new day object
         {
 
         }
@@ -69,23 +78,42 @@ namespace Fitness_Tracker_Phase_1
             {
             Dictionary<string, Food> foodDatabase = new Dictionary<string, Food> { };
             Dictionary<string, List<Food>> foodTime = new Dictionary<string, List<Food>> { { "breakfast", new List<Food>(1) }, { "lunch", new List<Food>(1) }, { "dinner", new List<Food>(1) }, { "snack", new List<Food>(1) } }; // change Food to consumed. think about whether list should be changed to dict 
-            
-            //List<Food> foodDatabase = new List<Food>();
-            //Console.WriteLine(foodDatabase.Capacity);
 
-            string foodName;
+            createNewFood(foodDatabase);
             double gramsConsumed;
+            if (foodIsInDatabase("chicken", foodDatabase))
+                Console.WriteLine("Exists");
+            else
+                Console.WriteLine("DNE");
+
+            Console.Write("Enter the amount of food consume in grams: ");
+            gramsConsumed = Convert.ToDouble(Console.ReadLine());
+
+
+            //foodDatabase.Add(new Food(foodName, carbsPerHundred, proteinPerHundred, carbsPerHundred, fatPerHundred)); // this is similar to how a value is added to an array. since the initial capacity of the list is 0 Add has to be used
+            //foodTime["breakfast"].Add(new Food(foodName, carbsPerHundred, proteinPerHundred, carbsPerHundred, fatPerHundred));
+            Console.WriteLine("The amount of {0} that has been consumed is {1}. This amounts to {2} calories which consist of {3}g of protein, {4}g of carbohydrates and {5}g of fat.", foodDatabase["chicken"].Name, gramsConsumed, gramsConsumed * foodDatabase["chicken"].Calories, gramsConsumed * foodDatabase["chicken"].Protein, gramsConsumed * foodDatabase["chicken"].Carabohydrates, gramsConsumed * foodDatabase["chicken"].Fat);
+            
+            Console.WriteLine(foodIsInDatabase("chicken", foodDatabase));
+            }
+
+        static void addFoodToDay(Dictionary<string, List<Food>> day, Dictionary<string, Food> database) // not done
+            {
+            string timeOfDay;
+            Console.Write("When did you consume this food [breakfast, lunch, dinner, snack]: ");
+            timeOfDay = Console.ReadLine();
+
+            }
+        static void createNewFood(Dictionary<string, Food> foodDatabase) // TODO: Write error handling function & add it to the tracker class
+            {
+            string foodName;
             double caloriesPerHundred;
             double proteinPerHundred;
             double carbsPerHundred;
             double fatPerHundred;
 
-            // TODO: Create this as a method in Day
-            // TODO: Write error handling function
             Console.Write("Enter the name of the food: ");
             foodName = Console.ReadLine();
-            Console.Write("Enter the amount of food consume in grams: ");
-            gramsConsumed = Convert.ToDouble(Console.ReadLine());
             Console.Write("Enter the amount of calories per 100g: ");
             caloriesPerHundred = Convert.ToDouble(Console.ReadLine()) / 100; // quantity has been divided so that everything recorded will be in 1g units
             Console.Write("Enter the amount of protein per 100g: ");
@@ -95,24 +123,10 @@ namespace Fitness_Tracker_Phase_1
             Console.Write("Enter the amount of fat per 100g: ");
             fatPerHundred = Convert.ToDouble(Console.ReadLine()) / 100;
 
-            //foodDatabase.Add(new Food(foodName, carbsPerHundred, proteinPerHundred, carbsPerHundred, fatPerHundred)); // this is similar to how a value is added to an array. since the initial capacity of the list is 0 Add has to be used
-            foodTime["breakfast"].Add(new Food(foodName, carbsPerHundred, proteinPerHundred, carbsPerHundred, fatPerHundred));
-            Console.WriteLine("The amount of {0} that has been consumed is {1}. This amounts to {2} calories which consist of {3}g of protein, {4}g of carbohydrates and {5}g of fat.", foodTime["breakfast"][0].Name, gramsConsumed, gramsConsumed * foodTime["breakfast"][0].Calories, gramsConsumed * foodTime["breakfast"][0].Protein, gramsConsumed * foodTime["breakfast"][0].Carabohydrates, gramsConsumed * foodTime["breakfast"][0].Fat);
+            foodDatabase.Add(foodName, new Food(foodName, caloriesPerHundred, proteinPerHundred, carbsPerHundred, fatPerHundred));
             }
 
-        void addFoodToDay(Dictionary<string, List<Food>> day) // not done
-            {
-
-            }
-        void createNewFood() // not done
-            {
-
-            }
-        void addFoodToDatabase() // not done
-            {
-
-            }
-        bool foodIsInDatabase(string foodName, Dictionary<string, Food> foodDatabase) // not done
+        static bool foodIsInDatabase(string foodName, Dictionary<string, Food> foodDatabase)
             {
             return foodDatabase.ContainsKey(foodName);
             }
@@ -123,7 +137,7 @@ namespace Fitness_Tracker_Phase_1
             }
         void deleteFoodFromDay(string foodName, string dayTime, Dictionary<string, List<Food>> database) // may need to change if consumed is used instead
             {
-            database[dayTime].Remove(database[dayTime].Find(Food => Food.Name == foodName)); // figure out how to access fields in a list. this was done through lambda expression
+            database[dayTime].Remove(database[dayTime].Find(Food => Food.Name == foodName));
             }
         void displaySpecificDay()
             {
