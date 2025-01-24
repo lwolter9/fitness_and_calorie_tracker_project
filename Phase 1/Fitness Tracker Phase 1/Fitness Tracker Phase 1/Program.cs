@@ -79,12 +79,8 @@ namespace Fitness_Tracker_Phase_1
             Dictionary<string, Food> foodDatabase = new Dictionary<string, Food> { };
             Dictionary<string, List<Food>> foodTime = new Dictionary<string, List<Food>> { { "breakfast", new List<Food>(1) }, { "lunch", new List<Food>(1) }, { "dinner", new List<Food>(1) }, { "snack", new List<Food>(1) } }; // change Food to consumed. think about whether list should be changed to dict 
 
-            createNewFood(foodDatabase);
             double gramsConsumed;
-            if (foodIsInDatabase("chicken", foodDatabase))
-                Console.WriteLine("Exists");
-            else
-                Console.WriteLine("DNE");
+            addFoodToDay(ref foodTime, ref foodDatabase);
 
             Console.Write("Enter the amount of food consume in grams: ");
             gramsConsumed = Convert.ToDouble(Console.ReadLine());
@@ -97,12 +93,20 @@ namespace Fitness_Tracker_Phase_1
             Console.WriteLine(foodIsInDatabase("chicken", foodDatabase));
             }
 
-        static void addFoodToDay(Dictionary<string, List<Food>> day, Dictionary<string, Food> database) // not done
+        static void addFoodToDay(ref Dictionary<string, List<Food>> day, ref Dictionary<string, Food> foodDatabase) // not done
             {
-            string timeOfDay;
-            Console.Write("When did you consume this food [breakfast, lunch, dinner, snack]: ");
+            string foodName, timeOfDay;
+            Console.Write("Which meal is it [breakfast, lunch, dinner, snack]: ");
             timeOfDay = Console.ReadLine();
-
+            Console.Write("What food did you eat: ");
+            foodName = Console.ReadLine();
+            if (!foodIsInDatabase(foodName, foodDatabase)) //add more exception handling in here.
+                {
+                createNewFood(foodDatabase);
+                day[timeOfDay].Add(foodDatabase[foodName]);
+                }
+            else
+                day[timeOfDay].Add(foodDatabase[foodName]);
             }
         static void createNewFood(Dictionary<string, Food> foodDatabase) // TODO: Write error handling function & add it to the tracker class
             {
