@@ -47,28 +47,29 @@ namespace Fitness_Tracker_Phase_1
         {
         public Dictionary<string, List<Food>> foodTime = new Dictionary<string, List<Food>> { { "breakfast", new List<Food>(1) }, { "lunch", new List<Food>(1) }, { "dinner", new List<Food>(1) }, { "snack", new List<Food>(1) } }; // TODO: figure out dictionaries
 
-        public void createEntry() // creates a new food item and adds it to the food database
+        public void CreateEntry() // creates a new food item and adds it to the food database
             {
 
             }
 
-        public void updateEntry() // updates food in database
+        public void UpdateEntry() // updates food in database
             {
 
             }
 
-        public void deleteEntry() // updates food in database
+        public void DeleteEntry() // updates food in database
             {
 
             }
 
-        public void findEntry() // updates food in database
+        public void FindEntry() // updates food in database
             {
 
             }
         }
     internal class Tracker //this holds all the information. the day object will act as a container for the Consumed objects. the food objects will hold individual food data. needs to check if today exists if not generate a new day object
         {
+        static public Dictionary<string, Day> Calendar = new Dictionary<string, Day> { };
 
         }
 
@@ -80,7 +81,7 @@ namespace Fitness_Tracker_Phase_1
             Dictionary<string, List<Food>> foodTime = new Dictionary<string, List<Food>> { { "breakfast", new List<Food>(1) }, { "lunch", new List<Food>(1) }, { "dinner", new List<Food>(1) }, { "snack", new List<Food>(1) } }; // change Food to consumed. think about whether list should be changed to dict 
 
             double gramsConsumed;
-            addFoodToDay(ref foodTime, ref foodDatabase);
+            AddFoodToDay(ref foodTime, ref foodDatabase);
 
             Console.Write("Enter the amount of food consume in grams: ");
             gramsConsumed = Convert.ToDouble(Console.ReadLine());
@@ -90,26 +91,49 @@ namespace Fitness_Tracker_Phase_1
             //foodTime["breakfast"].Add(new Food(foodName, carbsPerHundred, proteinPerHundred, carbsPerHundred, fatPerHundred));
             Console.WriteLine("The amount of {0} that has been consumed is {1}. This amounts to {2} calories which consist of {3}g of protein, {4}g of carbohydrates and {5}g of fat.", foodDatabase["chicken"].Name, gramsConsumed, gramsConsumed * foodDatabase["chicken"].Calories, gramsConsumed * foodDatabase["chicken"].Protein, gramsConsumed * foodDatabase["chicken"].Carabohydrates, gramsConsumed * foodDatabase["chicken"].Fat);
             
-            Console.WriteLine(foodIsInDatabase("chicken", foodDatabase));
+            Console.WriteLine(FoodIsInDatabase("chicken", foodDatabase));
             }
 
-        static void addFoodToDay(ref Dictionary<string, List<Food>> day, ref Dictionary<string, Food> foodDatabase) // not done
+        static void AddFoodToDay(ref Dictionary<string, List<Food>> day, ref Dictionary<string, Food> foodDatabase) // not done
             {
             string foodName, timeOfDay;
             Console.Write("Which meal is it [breakfast, lunch, dinner, snack]: ");
             timeOfDay = Console.ReadLine();
             Console.Write("What food did you eat: ");
             foodName = Console.ReadLine();
-            if (!foodIsInDatabase(foodName, foodDatabase)) //add more exception handling in here.
+            if (!FoodIsInDatabase(foodName, foodDatabase)) //add more exception handling in here.
                 {
-                createNewFood(foodDatabase);
+                CreateNewFood(foodDatabase);
                 day[timeOfDay].Add(foodDatabase[foodName]);
                 }
             else
                 day[timeOfDay].Add(foodDatabase[foodName]);
             }
-        static void createNewFood(Dictionary<string, Food> foodDatabase) // TODO: Write error handling function & add it to the tracker class
+
+        /*
+         Implementation of HtDP course
+         HtDF:
+        foodDatabase -> void
+        creates a new food and adds it to the database
+        static void CreateNewFood(foodDatabase){return;}
+         
+         
+         
+         */
+        static void CreateNewFood(Dictionary<string, Food> foodDatabase) // TODO: Write error handling function & add it to the tracker class
             {
+            /*
+             Implementation of HtDP course
+            HtDD:
+            foodName is String
+            interp. name of a food item
+            const string FOOD_CUT = "chicken";
+
+            static void FunctionForFoodName(fn)
+            {
+            return fn;
+            }
+             */
             string foodName;
             double caloriesPerHundred;
             double proteinPerHundred;
@@ -130,20 +154,20 @@ namespace Fitness_Tracker_Phase_1
             foodDatabase.Add(foodName, new Food(foodName, caloriesPerHundred, proteinPerHundred, carbsPerHundred, fatPerHundred));
             }
 
-        static bool foodIsInDatabase(string foodName, Dictionary<string, Food> foodDatabase)
+        static bool FoodIsInDatabase(string foodName, Dictionary<string, Food> foodDatabase)
             {
             return foodDatabase.ContainsKey(foodName);
             }
 
-        void deleteFoodFromDatabase(string foodName, Dictionary<string, Food> database)
+        void DeleteFoodFromDatabase(string foodName, Dictionary<string, Food> database)
             {
             database.Remove(foodName);
             }
-        void deleteFoodFromDay(string foodName, string dayTime, Dictionary<string, List<Food>> database) // may need to change if consumed is used instead
+        void DeleteFoodFromDay(string foodName, string dayTime, Dictionary<string, List<Food>> database) // may need to change if consumed is used instead
             {
             database[dayTime].Remove(database[dayTime].Find(Food => Food.Name == foodName));
             }
-        void displaySpecificDay()
+        void DisplaySpecificDay()
             {
 
             }
