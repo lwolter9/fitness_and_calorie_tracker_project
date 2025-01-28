@@ -77,7 +77,7 @@ namespace Fitness_Tracker_Phase_1
         {
         static void Main(string[] args)
             {
-            Dictionary<string, Food> foodDatabase = new Dictionary<string, Food> { };
+            Dictionary<string, Food> foodDatabase = new Dictionary<string, Food> { {"chicken", new Food("chicken", 1, 1, 1, 1) } };
             Dictionary<string, List<Food>> foodTime = new Dictionary<string, List<Food>> { { "breakfast", new List<Food>(1) }, { "lunch", new List<Food>(1) }, { "dinner", new List<Food>(1) }, { "snack", new List<Food>(1) } }; // change Food to consumed. think about whether list should be changed to dict 
 
             double gramsConsumed;
@@ -89,8 +89,8 @@ namespace Fitness_Tracker_Phase_1
 
             //foodDatabase.Add(new Food(foodName, carbsPerHundred, proteinPerHundred, carbsPerHundred, fatPerHundred)); // this is similar to how a value is added to an array. since the initial capacity of the list is 0 Add has to be used
             //foodTime["breakfast"].Add(new Food(foodName, carbsPerHundred, proteinPerHundred, carbsPerHundred, fatPerHundred));
-            Console.WriteLine("The amount of {0} that has been consumed is {1}. This amounts to {2} calories which consist of {3}g of protein, {4}g of carbohydrates and {5}g of fat.", foodDatabase["chicken"].Name, gramsConsumed, gramsConsumed * foodDatabase["chicken"].Calories, gramsConsumed * foodDatabase["chicken"].Protein, gramsConsumed * foodDatabase["chicken"].Carabohydrates, gramsConsumed * foodDatabase["chicken"].Fat);
-            
+            Console.WriteLine("The amount of {0} that has been consumed is {1}. This amounts to {2} calories which consist of {3}g of protein, {4}g of carbohydrates and {5}g of fat.", foodTime["breakfast"][0].Name, gramsConsumed, gramsConsumed * foodTime["breakfast"][0].Calories, gramsConsumed * foodTime["breakfast"][0].Protein, gramsConsumed * foodTime["breakfast"][0].Carabohydrates, gramsConsumed * foodTime["breakfast"][0].Fat);
+            DeleteFoodFromDatabase("chicken", foodDatabase);
             Console.WriteLine(FoodIsInDatabase("chicken", foodDatabase));
             }
 
@@ -154,16 +154,23 @@ namespace Fitness_Tracker_Phase_1
             foodDatabase.Add(foodName, new Food(foodName, caloriesPerHundred, proteinPerHundred, carbsPerHundred, fatPerHundred));
             }
 
+        /*
+         HtDF
+        foodName, Dictionary -> Boolean
+        checks if a foodName is in a Dictionary and returns true if it is in
+         static bool FoodIsInDatabase(string foodName, Dictionary<string, Food> foodDatabase)
+         
+         */
         static bool FoodIsInDatabase(string foodName, Dictionary<string, Food> foodDatabase)
             {
             return foodDatabase.ContainsKey(foodName);
             }
 
-        void DeleteFoodFromDatabase(string foodName, Dictionary<string, Food> database)
+        static void DeleteFoodFromDatabase(string foodName, Dictionary<string, Food> database)
             {
             database.Remove(foodName);
             }
-        void DeleteFoodFromDay(string foodName, string dayTime, Dictionary<string, List<Food>> database) // may need to change if consumed is used instead
+        static void DeleteFoodFromDay(string foodName, string dayTime, Dictionary<string, List<Food>> database) // may need to change if consumed is used instead. this should be non-static when implemented into the consumed class.
             {
             database[dayTime].Remove(database[dayTime].Find(Food => Food.Name == foodName));
             }
