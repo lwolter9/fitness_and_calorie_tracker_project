@@ -28,7 +28,7 @@ namespace Fitness_Tracker_Phase_1
             Fat = fat;
             }
         }
-    internal class Consumed
+    internal class Consumed // container for a food object and the amount consumed
         {
         public double AmountConsumed { get; set; } // TODO: TEST THIS SHIT OUT
         public Food ConsumedFood { get; set; }
@@ -45,23 +45,41 @@ namespace Fitness_Tracker_Phase_1
         }
     internal class Day // stores the food objects in 4 categories depending on user input as well as the amount of food consumed use a dictionary to acomplish this
         {
-        public Dictionary<string, List<Food>> foodTime = new Dictionary<string, List<Food>> { { "breakfast", new List<Food>(1) }, { "lunch", new List<Food>(1) }, { "dinner", new List<Food>(1) }, { "snack", new List<Food>(1) } }; // TODO: figure out dictionaries
+        public Dictionary<string, List<Consumed>> foodTime = new Dictionary<string, List<Consumed>> { { "breakfast", new List<Consumed>(1) }, { "lunch", new List<Consumed>(1) }, { "dinner", new List<Consumed>(1) }, { "snack", new List<Consumed>(1) } }; // TODO: figure out dictionaries
 
-        public void CreateEntry() // creates a new food item and adds it to the food database
+        /*
+         foodTime -> foodTime
+         
+         
+         
+         */
+        public void CreateEntry(Dictionary<string, List<Consumed>> foodTime) // creates a new food item and adds it to the food database
             {
 
             }
-
+        /*
+         
+         
+         */
         public void UpdateEntry() // updates food in database
             {
 
             }
-
+        /*
+         
+         
+         
+         */
         public void DeleteEntry() // updates food in database
             {
 
             }
-
+        /*
+         
+         
+         
+         
+         */
         public void FindEntry() // updates food in database
             {
 
