@@ -49,13 +49,24 @@ namespace Fitness_Tracker_Phase_1
 
         /*
          foodTime -> foodTime
-         
+         asks for meal time and food name. if food exists in list asks if user would like to modify otherwise does not add food
          
          
          */
-        public void CreateEntry(Dictionary<string, List<Consumed>> foodTime) // creates a new food item and adds it to the food database
+        public void CreateEntry(Dictionary<string, List<Consumed>> foodTime) // creates a new consumed item and adds it to the food database
             {
-
+            string foodName, timeOfDay;
+            Console.Write("Which meal is it [breakfast, lunch, dinner, snack]: ");
+            timeOfDay = Console.ReadLine();
+            Console.Write("What food did you eat: ");
+            foodName = Console.ReadLine();
+            if (!FoodIsInDatabase(foodName, foodDatabase)) //add more exception handling in here.
+                {
+                CreateNewFood(foodDatabase);
+                day[timeOfDay].Add(foodDatabase[foodName]);
+                }
+            else
+                day[timeOfDay].Add(foodDatabase[foodName]);
             }
         /*
          
@@ -70,7 +81,7 @@ namespace Fitness_Tracker_Phase_1
          
          
          */
-        public void DeleteEntry() // updates food in database
+        public void DeleteEntry() // deletes food in database
             {
 
             }
@@ -80,10 +91,11 @@ namespace Fitness_Tracker_Phase_1
          
          
          */
-        public void FindEntry() // updates food in database
+        public bool FindEntry(string foodName, Dictionary<string, List<Consumed>> foodList) // checks if food is in database
             {
-
+            return true;
             }
+
         }
     internal class Tracker //this holds all the information. the day object will act as a container for the Consumed objects. the food objects will hold individual food data. needs to check if today exists if not generate a new day object
         {
