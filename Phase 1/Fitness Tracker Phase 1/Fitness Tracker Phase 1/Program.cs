@@ -53,14 +53,14 @@ namespace Fitness_Tracker_Phase_1
          
          
          */
-        public void CreateEntry(Dictionary<string, List<Consumed>> foodTime) // creates a new consumed item and adds it to the food database
+        public void CreateEntry(Dictionary<string, List<Consumed>> foodTime, Dictionary<string, Food> database) // creates a new consumed item and adds it to the food database
             {
             string foodName, timeOfDay;
             Console.Write("Which meal is it [breakfast, lunch, dinner, snack]: ");
             timeOfDay = Console.ReadLine();
             Console.Write("What food did you eat: ");
             foodName = Console.ReadLine();
-            if (!FoodIsInDatabase(foodName, foodDatabase)) //add more exception handling in here.
+            if (!FoodIsInDatabase(foodName, foodDatabase)) //this has gotten a bit complicated. i need to access the database of food from tracker in this method to retreive food items and add them to the day.
                 {
                 CreateNewFood(foodDatabase);
                 day[timeOfDay].Add(foodDatabase[foodName]);
@@ -100,6 +100,12 @@ namespace Fitness_Tracker_Phase_1
     internal class Tracker //this holds all the information. the day object will act as a container for the Consumed objects. the food objects will hold individual food data. needs to check if today exists if not generate a new day object
         {
         static public Dictionary<string, Day> Calendar = new Dictionary<string, Day> { };
+        static public List<Food> Foods = new List<Food>(1);
+
+        static void DisplaySpecificDay(Dictionary<string, Day> calendar, string date)
+            {
+
+            }
 
         }
 
@@ -204,10 +210,7 @@ namespace Fitness_Tracker_Phase_1
             {
             database[dayTime].Remove(database[dayTime].Find(Food => Food.Name == foodName));
             }
-        void DisplaySpecificDay()
-            {
 
-            }
         }
     }
 
