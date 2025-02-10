@@ -59,7 +59,7 @@ namespace Fitness_Tracker_Phase_1
             Console.Write("Which meal is it [breakfast, lunch, dinner, snack]: ");
             timeOfDay = Console.ReadLine();
             Console.Write("What food did you eat: ");
-            foodName = Console.ReadLine();
+            foodName = Console.ReadLine(); // ok so here is the thought. this method can end here. call it through a method in the tracker class and have that method handle the checks since that method is responsible for most actions. that way i can keep everything nicely separated into their own functions.
             if (!FoodIsInDatabase(foodName, foodDatabase)) //this has gotten a bit complicated. i need to access the database of food from tracker in this method to retreive food items and add them to the day.
                 {
                 CreateNewFood(foodDatabase);
@@ -106,56 +106,32 @@ namespace Fitness_Tracker_Phase_1
             {
 
             }
-
-        }
-
-    internal class Program
-        {
-        static void Main(string[] args)
+        static void DeleteFoodFromDatabase(string foodName, Dictionary<string, Food> database) //adjust to take Calendar
             {
-            Dictionary<string, Food> foodDatabase = new Dictionary<string, Food> { {"chicken", new Food("chicken", 1, 1, 1, 1) } };
-            Dictionary<string, List<Food>> foodTime = new Dictionary<string, List<Food>> { { "breakfast", new List<Food>(1) }, { "lunch", new List<Food>(1) }, { "dinner", new List<Food>(1) }, { "snack", new List<Food>(1) } }; // change Food to consumed. think about whether list should be changed to dict 
-
-            double gramsConsumed;
-            AddFoodToDay(ref foodTime, ref foodDatabase);
-
-            Console.Write("Enter the amount of food consume in grams: ");
-            gramsConsumed = Convert.ToDouble(Console.ReadLine());
-
-
-            //foodDatabase.Add(new Food(foodName, carbsPerHundred, proteinPerHundred, carbsPerHundred, fatPerHundred)); // this is similar to how a value is added to an array. since the initial capacity of the list is 0 Add has to be used
-            //foodTime["breakfast"].Add(new Food(foodName, carbsPerHundred, proteinPerHundred, carbsPerHundred, fatPerHundred));
-            Console.WriteLine("The amount of {0} that has been consumed is {1}. This amounts to {2} calories which consist of {3}g of protein, {4}g of carbohydrates and {5}g of fat.", foodTime["breakfast"][0].Name, gramsConsumed, gramsConsumed * foodTime["breakfast"][0].Calories, gramsConsumed * foodTime["breakfast"][0].Protein, gramsConsumed * foodTime["breakfast"][0].Carabohydrates, gramsConsumed * foodTime["breakfast"][0].Fat);
-            DeleteFoodFromDatabase("chicken", foodDatabase);
-            Console.WriteLine(FoodIsInDatabase("chicken", foodDatabase));
+            database[dayTime].Remove(database[dayTime].Find(Food => Food.Name == foodName));
             }
+        /*
+        HtDF
+        foodName, Dictionary -> Boolean
+        checks if a foodName is in a Dictionary and returns true if it is in
+        static bool FoodIsInDatabase(string foodName, Dictionary<string, Food> foodDatabase)
 
-        static void AddFoodToDay(ref Dictionary<string, List<Food>> day, ref Dictionary<string, Food> foodDatabase) // not done
+        */
+        static bool FoodIsInDatabase(string foodName, Dictionary<string, Food> foodDatabase)
             {
-            string foodName, timeOfDay;
-            Console.Write("Which meal is it [breakfast, lunch, dinner, snack]: ");
-            timeOfDay = Console.ReadLine();
-            Console.Write("What food did you eat: ");
-            foodName = Console.ReadLine();
-            if (!FoodIsInDatabase(foodName, foodDatabase)) //add more exception handling in here.
-                {
-                CreateNewFood(foodDatabase);
-                day[timeOfDay].Add(foodDatabase[foodName]);
-                }
-            else
-                day[timeOfDay].Add(foodDatabase[foodName]);
+            return foodDatabase.ContainsKey(foodName);
             }
 
         /*
-         Implementation of HtDP course
-         HtDF:
-        foodDatabase -> void
-        creates a new food and adds it to the database
-        static void CreateNewFood(foodDatabase){return;}
-         
-         
-         
-         */
+        Implementation of HtDP course
+        HtDF:
+       foodDatabase -> void
+       creates a new food and adds it to the database
+       static void CreateNewFood(foodDatabase){return;}
+
+
+
+        */
         static void CreateNewFood(Dictionary<string, Food> foodDatabase) // TODO: Write error handling function & add it to the tracker class
             {
             /*
@@ -189,28 +165,49 @@ namespace Fitness_Tracker_Phase_1
 
             foodDatabase.Add(foodName, new Food(foodName, caloriesPerHundred, proteinPerHundred, carbsPerHundred, fatPerHundred));
             }
-
-        /*
-         HtDF
-        foodName, Dictionary -> Boolean
-        checks if a foodName is in a Dictionary and returns true if it is in
-         static bool FoodIsInDatabase(string foodName, Dictionary<string, Food> foodDatabase)
-         
-         */
-        static bool FoodIsInDatabase(string foodName, Dictionary<string, Food> foodDatabase)
+        static void AddDayToCalendar()
             {
-            return foodDatabase.ContainsKey(foodName);
+
             }
 
-        static void DeleteFoodFromDatabase(string foodName, Dictionary<string, Food> database)
+        }
+
+    internal class Program
+        {
+        static void Main(string[] args)
             {
-            database.Remove(foodName);
-            }
-        static void DeleteFoodFromDay(string foodName, string dayTime, Dictionary<string, List<Food>> database) // may need to change if consumed is used instead. this should be non-static when implemented into the consumed class.
-            {
-            database[dayTime].Remove(database[dayTime].Find(Food => Food.Name == foodName));
+            Dictionary<string, Food> foodDatabase = new Dictionary<string, Food> { { "chicken", new Food("chicken", 1, 1, 1, 1) } };
+            Dictionary<string, List<Food>> foodTime = new Dictionary<string, List<Food>> { { "breakfast", new List<Food>(1) }, { "lunch", new List<Food>(1) }, { "dinner", new List<Food>(1) }, { "snack", new List<Food>(1) } }; // change Food to consumed. think about whether list should be changed to dict 
+
+            double gramsConsumed;
+            AddFoodToDay(ref foodTime, ref foodDatabase);
+
+            Console.Write("Enter the amount of food consume in grams: ");
+            gramsConsumed = Convert.ToDouble(Console.ReadLine());
+
+
+            //foodDatabase.Add(new Food(foodName, carbsPerHundred, proteinPerHundred, carbsPerHundred, fatPerHundred)); // this is similar to how a value is added to an array. since the initial capacity of the list is 0 Add has to be used
+            //foodTime["breakfast"].Add(new Food(foodName, carbsPerHundred, proteinPerHundred, carbsPerHundred, fatPerHundred));
+            Console.WriteLine("The amount of {0} that has been consumed is {1}. This amounts to {2} calories which consist of {3}g of protein, {4}g of carbohydrates and {5}g of fat.", foodTime["breakfast"][0].Name, gramsConsumed, gramsConsumed * foodTime["breakfast"][0].Calories, gramsConsumed * foodTime["breakfast"][0].Protein, gramsConsumed * foodTime["breakfast"][0].Carabohydrates, gramsConsumed * foodTime["breakfast"][0].Fat);
+            DeleteFoodFromDatabase("chicken", foodDatabase);
+            Console.WriteLine(FoodIsInDatabase("chicken", foodDatabase));
             }
 
+        static void AddFoodToDay(ref Dictionary<string, List<Food>> day, ref Dictionary<string, Food> foodDatabase) // not done
+            {
+            string foodName, timeOfDay;
+            Console.Write("Which meal is it [breakfast, lunch, dinner, snack]: ");
+            timeOfDay = Console.ReadLine();
+            Console.Write("What food did you eat: ");
+            foodName = Console.ReadLine();
+            if (!FoodIsInDatabase(foodName, foodDatabase)) //add more exception handling in here.
+                {
+                CreateNewFood(foodDatabase);
+                day[timeOfDay].Add(foodDatabase[foodName]);
+                }
+            else
+                day[timeOfDay].Add(foodDatabase[foodName]);
+            }
         }
     }
 
